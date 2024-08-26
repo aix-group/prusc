@@ -5,45 +5,7 @@ import torch
 import torchvision.transforms as transforms
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader
-from torch.utils.data.sampler import WeightedRandomSampler
-
-class ColoredMNIST(Dataset):
-    def __init__(self, basedir, name='coloredmnist', split='train', transform=None, conflict_pct=5):
-        self.basedir = basedir
-        self.name = name
-        self.transform = transform
-        self.folder_dir = os.path.join('../DCWP/dataset/ColoredMNIST')
-        self.data_dir = os.path.join('../DCWP/dataset/ColoredMNIST', split)
-        if split == 'train':
-            self.metadata = pd.read_csv(os.path.join('../DCWP/dataset/ColoredMNIST', 'train_data.csv'))
-        else:
-            self.metadata = pd.read_csv(os.path.join('../DCWP/dataset/ColoredMNIST', 'valid_data.csv'))
-        self.filename_array = self.metadata["idx"].values
-        self.y_array = self.metadata["y"].values
-        self.att_array = self.metadata["bg"].values
-        self.n_classes = np.unique(self.y_array).size
-        self.n_places = np.unique(self.att_array).size
-        self.group_array = (self.y_array * self.n_places + self.att_array).astype('int')
-        self.n_groups = self.n_classes * self.n_places
-        self.group_counts = (torch.arange(self.n_groups).unsqueeze(1) == torch.from_numpy(self.group_array)).sum(1).float()
-        
-        
-    def __len__(self):
-        return len(self.y_array)
-
-    def __getitem__(self, index):
-        y = self.y_array[index]
-        p = self.att_array[index]
-
-        img_filename = os.path.join(self.data_dir,
-                                    self.filename_array[index])
-        image = Image.open(img_filename).convert("RGB")
-        g = self.group_array[index]
-        if self.transform is not None:
-            image = self.transform(image)
-
-        return image, y, g, p, img_filename
-        
+from torch.utils.data.sampler import WeightedRandomSampler      
         
 class SkinCancerDataset(Dataset):
     def __init__(self, basedir, split="train", transform=None):
