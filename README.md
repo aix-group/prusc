@@ -16,6 +16,7 @@ Machine learning models are known to learn spurious correlations, i.e., features
 
 ### Run experiments
 Given trained model, run file `cluster/clustering.py` cluster representation space
+
 To run a demo of **PruSC** with CelebA dataset (given ERM representation clusters stored in `demo/celeba_clustering.csv`)
 
 `python3 run.py --mode prune --data celebA --train_root_dir=<DATA_DIR> --imagenet --lambda_sparse 5e-8 --pruning_ep=<EPOCH> --retrain_ep=<EPOCH>`
