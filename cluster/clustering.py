@@ -10,14 +10,9 @@ import argparse
 import sys
 from collections import defaultdict
 import json
-#from optimizer import SGD
-from sc_data import SkinCancerDataset, get_loader, get_transform, log_data
-from dataset import CelebADataset, ISICDataset, CUBDataset
+from dataset import CelebADataset, ISICDataset, CUBDataset, SkinCancerDataset, get_loader, get_transform, log_data
 
 from utils_1 import Logger, AverageMeter, set_seed, evaluate, get_y_p
-#from utils_1 import update_dict, get_results, write_dict_to_tb
-#from models import ConvModel
-
 from sklearn.manifold import TSNE
 
 #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
