@@ -1,4 +1,4 @@
-# Spurious-free Subnetworks
+# Pruning Spurious Correlations
 This is official code for reproducing paper **Out of Spuriousity: Improving Robustness to Spurious Correlations without Group Annotations**
 
 ## Abstract
