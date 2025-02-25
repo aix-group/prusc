@@ -5,7 +5,7 @@ from munch import Munch
 from torch.backends import cudnn
 import torch
 
-from training.pruning_solver import PruneSolver
+from training.pruning import PruneSolver
 from util import setup, save_config, modify_args_for_baselines
 
 
