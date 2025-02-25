@@ -27,7 +27,6 @@ class SupervisedContrastiveLoss(nn.Module):
                                        return_sum=False)
 
         sum_exp_neg = exp_neg.sum(0, keepdim=True)
-        #print('sum_exp_neg', sum_exp_neg)
         # Compute positive similarities
         anchor_positives = contrastive_batch[:1 + num_positive]
         exp_pos = self.compute_exp_sim(model, anchor_positives, 
@@ -53,12 +52,9 @@ class SupervisedContrastiveLoss(nn.Module):
                   else torch.device('cpu'))
         features = features.to(device)
         model.classifier.pruning_switch(True)
-            #outputs = model(features)
         pred, outputs = model.classifier(features, feature=True)
         sim = self.sim(outputs[0].view(1, -1), outputs[1:])
-        #print('similarity', sim)
         exp_sim = torch.exp(torch.div(sim, self.temperature))
-        # Should not detach from graph
         features = features.to(torch.device('cpu'))
         outputs = outputs.to(torch.device('cpu'))
         if return_sum:

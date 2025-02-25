@@ -24,16 +24,5 @@ def save_config(args):
     with open(os.path.join(args.log_dir, 'args.txt'), 'a') as f:
         json.dump(args.__dict__, f, indent=2)
 
-def modify_args_for_baselines(args):
-    if args.mode == 'MRM':
-        args.select_with_GCE = False
-        args.uniform_weight = True
-        args.reinitialize = True
-        args.lambda_upweight = 1
-        args.lambda_con_prune = 0
-        args.lambda_con_retrain = 0
-
-        print(f'----- [{args.mode}] Hyperparameters modified ------')
-
     return args
 
